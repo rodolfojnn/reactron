@@ -1,3 +1,4 @@
+require('electron-reload')(__dirname);
 import electron from 'electron';
 import path from 'path';
 import url from 'url';
@@ -27,7 +28,7 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    
+
     // Caracteristicas visuais da janela
     // autoHideMenuBar: true,
     // titleBarStyle: 'customButtonsOnHover',
