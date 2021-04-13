@@ -11,7 +11,7 @@ export default class BasicForm extends React.Component{
 
     this.state = {
         data: Array(),
-        f1: '', 
+        f1: '',
         f2: ''
     }
   }
@@ -34,40 +34,40 @@ export default class BasicForm extends React.Component{
   }
 
   render(){
-    return ( 
+    return (
       <div style={{margin: 4}}>
         <p align="right"><b>source: </b>basic-form.js</p>
         <h2>Formulário simples com interação entre componentes.</h2>
-        
-        <form onSubmit={() => {this.onClickSubmit(event)}}>
+
+        <form onSubmit={(e) => {this.onClickSubmit(e)}}>
             <TextField
-                required id="f1" value={this.state.f1} 
-                label="Campo1" onChange={() => {this.onTextChange(event)}}
+                required id="f1" value={this.state.f1}
+                label="Campo1" onChange={(e) => {this.onTextChange(e)}}
             />
             {" "}
             <TextField
                 required id="f2" value={this.state.f2}
-                label="Campo2" onChange={() => {this.onTextChange(event)}}
+                label="Campo2" onChange={(e) => {this.onTextChange(e)}}
             />
             {" "}
 
             <AppButton type="submit" size="large">
                 INSERIR
-            </AppButton> 
-        </form>  
+            </AppButton>
+        </form>
 
         { this.state.data.map((data, index) => {
-            return <BasicItem 
+            return <BasicItem
                 delItem={this.delItem}
                 parent={this}
-                index={index} 
-                key={index} 
+                index={index}
+                key={index}
                 f2={data.list[0]}
                 f1={data.list[1]}
                 />
             })
         }
-      </div> 
+      </div>
     )
   }
 }
