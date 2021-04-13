@@ -14,10 +14,6 @@ export default class App extends React.Component {
       pageRouted: Welcome
     };
 
-    setTimeout(() => {
-      console.clear();
-    }, 500)
-
   }
 
   routePage = (page) => {

@@ -1,8 +1,9 @@
 require('electron-reload')(__dirname);
 import electron from 'electron';
 import path from 'path';
-import url from 'url';
 import robot from 'robotjs';
+import url from 'url';
+const { ipcMain } = require('electron')
 
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -10,8 +11,8 @@ let mainWindow;
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
 
     // Caracteristicas visuais da janela
     // autoHideMenuBar: true,
@@ -74,6 +75,27 @@ exports.mouseMove = () => {
 
 }
 
+exports.mouseColor = () => {
+  try {
+    var mouse = robot.getMousePos();
+    var hex = robot.getPixelColor(mouse.x, mouse.y);
+    return hex;
+  } catch (error) {
+    return error
+  }
+}
+
+exports.mouseColorArray = (arrayColors) => {
+  try {
+    return arrayColors.reduce((a, b) => {
+      a.push(robot.getPixelColor(b.x, b.y));
+      return a;
+    }, []);
+  } catch (error) {
+    return error
+  }
+}
+
 exports.execProcess = (process, callback) => {
   const { exec } = require('child_process');
   const callExec = exec(process)
@@ -85,3 +107,17 @@ exports.execProcess = (process, callback) => {
     callback("<b>ERROR:</b> \n" + data)
   })
 }
+
+ipcMain.on('ipcTeste', (event, arrayColors) => {
+  try {
+    const ret = arrayColors.reduce((a, b) => {
+      a.push(robot.getPixelColor(b.x, b.y));
+      return a;
+    }, []);
+    event.reply('ipcTeste-reply', ret)
+
+  } catch (error) {
+    event.returnValue = error
+  }
+
+})

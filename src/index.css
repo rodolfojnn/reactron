@@ -1,9 +1,16 @@
 body {
-    margin: 0px;
+  margin: 0px;
 }
 
 .mainContent {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-    margin: 0px;
-    border: 3px solid #494440;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  margin: 0px;
+  border: 3px solid #494440;
 }
+
+#welcome .histo h4 {padding: 0;margin:10px 0}
+#welcome .histo .switch {width: 167px;display: grid;grid-template-columns: 1fr 1fr 1fr;align-items: center;justify-content: center;}
+#welcome .histo .switch .box {width: 50px; height: 50px;cursor: pointer;display:grid;align-content: center;justify-content: center;color: white;font-size: 9px;font-weight: bold;}
+#welcome .histo .switch .color-buy {background-color: black;}
+#welcome .histo .switch .color-sell {background-color: black;}
+#welcome .histo .switch .status {background-color: black;}
