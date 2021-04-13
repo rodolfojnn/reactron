@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import AppButton from './app-button';
 const { remote } = require('electron')
@@ -11,12 +12,39 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      histoSelectedTipo: '',
+      histoSelected: null,
       histogramas: {
         hist1: {x: 0, y: 0, buy: '000', sell: '000', status: '000', timer: null},
         hist2: {x: 0, y: 0, buy: '000', sell: '000', status: '000', timer: null},
         hist3: {x: 0, y: 0, buy: '000', sell: '000', status: '000', timer: null}
       }
     }
+  }
+
+  componentDidMount() {
+    document.addEventListener('keypress', this.processSpaceKey)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keypress', this.processSpaceKey);
+  }
+
+  processSpaceKey = (e) => {
+    if (e.code === 'Space' && this.state.histoSelected) {
+      console.log(this.state.histoSelected);
+      console.log(this.state.histoSelectedTipo);
+    }
+  }
+
+  markColor(hist, tipo) {
+    // alert('Atenção! Após posicionar o mouse sobre a cor desejada, pressione a BARRA DE ESPAÇO');
+    this.setState({histoSelected: hist, histoSelectedTipo: tipo});
+  }
+
+  markCoord(hist) {
+    // alert('Atenção! Após posicionar o mouse sobre a cor desejada, pressione a tecla BARRA DE ESPAÇO');
+    this.setState({histoSelected: hist, histoSelectedTipo: 'coord'});
   }
 
   async onTeste(e) {
@@ -41,13 +69,17 @@ export default class Home extends React.Component {
             <div className="histo">
               <h4>HISTOGRAMA 1</h4>
               <div className="switch">
-                <div className="box color-buy" onClick={(e) => this.onTeste(e)}><span>COMPRA</span></div>
-                <div className="box color-sell"><span>VENDE</span></div>
-                <div className="box status"><span>STATUS</span></div>
+                <div className="box color-buy" onClick={() => this.markColor(this.state.histogramas.hist1, 'buy')}><span>COMPRA</span></div>
+                <div className="box color-sell" onClick={() => this.markColor(this.state.histogramas.hist1, 'sell')}><span>VENDE</span></div>
+                <div className="box status" onClick={() => this.markCoord(this.state.histogramas.hist1)}><span>STATUS</span></div>
               </div>
             </div>
-            <p>{JSON.stringify(this.state.histogramas)}</p>
+            <p>{JSON.stringify(this.state)}</p>
           </div>
+
+          <Button variant="contained" color="secondary">
+            Secondary
+          </Button>
 
         </article>
 
