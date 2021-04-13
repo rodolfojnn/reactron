@@ -8,41 +8,6 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
 
-// *Funcoes devem ser exportadas pra serem acessiveis ao front-end
-// Executa comando do SO e retorna resultado ao front-end
-// Outro processo é o IPCMaine IPCRenderer
-// https://electronjs.org/docs/api/ipc-main
-// https://electronjs.org/docs/api/ipc-renderer
-exports.execProcess = (process, callback) => {
-  const { exec } = require('child_process');
-  const callExec = exec(process)
-
-  callExec.stdout.on('data', function(data){
-    callback(data)
-  })
-  callExec.stderr.on('data', function(data){
-    callback("<b>ERROR:</b> \n" + data)
-  })
-}
-
-exports.testeProcess = () => {
-  // Speed up the mouse.
-  robot.setMouseDelay(2);
-
-  const twoPI = Math.PI * 10;
-  const screenSize = robot.getScreenSize();
-  const height = (screenSize.height / 2) - 10;
-  const width = screenSize.width;
-
-  for (let x = 0; x < width; x = x + 5)
-  {
-    const y = height * Math.sin((twoPI * x) / width) + height;
-    robot.moveMouse(x, y);
-  }
-}
-
-
-
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
@@ -85,3 +50,38 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+///////////////////////////////////////////////////
+
+exports.mouseMove = () => {
+  return new Promise(resolve => {
+    // Speed up the mouse.
+    robot.setMouseDelay(2);
+
+    const twoPI = Math.PI * 10;
+    const screenSize = robot.getScreenSize();
+    const height = (screenSize.height / 2) - 10;
+    const width = screenSize.width;
+
+    for (let x = 0; x < width; x = x + 5)
+    {
+      const y = height * Math.sin((twoPI * x) / width) + height;
+      robot.moveMouse(x, y);
+    }
+
+    return resolve(true);
+  })
+
+}
+
+exports.execProcess = (process, callback) => {
+  const { exec } = require('child_process');
+  const callExec = exec(process)
+
+  callExec.stdout.on('data', function(data){
+    callback(data)
+  })
+  callExec.stderr.on('data', function(data){
+    callback("<b>ERROR:</b> \n" + data)
+  })
+}

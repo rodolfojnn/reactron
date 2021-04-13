@@ -5,8 +5,9 @@ const backend = remote.require('./main.js')
 
 export default class Home extends React.Component{
 
-  onTeste = (e) => {
-    console.log(backend.testeProcess());
+  onTeste(e) {
+    backend.mouseMove();
+    console.log('final');
   }
 
   render(){
