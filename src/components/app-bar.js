@@ -39,13 +39,13 @@ export default class AppBar extends React.Component{
                 this.setState({ maximizeIcon: <CropSquare/> })
         })
     }
-    
+
     render(){
         const {
             open,
             anchorEl = null,
         } = this.state;
-      
+
         // Styles
         const appBarStyle = {
             WebkitAppRegion: "drag",
@@ -71,8 +71,8 @@ export default class AppBar extends React.Component{
             fontSize: 20
         }
 
-        return ( 
-            <div style={ appBarStyle }>                
+        return (
+            <div style={ appBarStyle }>
                 <AppMenu mainApp={this.state.mainApp}/>
                 <h1 style={ appH1 }>Reactron</h1>
 
@@ -88,7 +88,7 @@ export default class AppBar extends React.Component{
                     onClick={() => { window.close() } }>
                     <Close />
                 </IconButton>
-            </div> 
+            </div>
         )
     }
 }

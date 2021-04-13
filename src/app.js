@@ -26,7 +26,7 @@ export default class App extends React.Component {
                     <DialogTitle style={{padding: 0}}>
                         <AppBar mainApp={this}></AppBar>
                     </DialogTitle>
-                    
+
                     <DialogContent className={'mainContent'}>
                         <Router>
                             <Route component={this.state.pageRouted}/>

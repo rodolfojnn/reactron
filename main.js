@@ -24,6 +24,11 @@ exports.execProcess = (process, callback) => {
   })
 }
 
+exports.testeProcess = (process, callback) => {
+  console.log(11111111111111111111);
+  return 222222222;
+}
+
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
@@ -36,7 +41,8 @@ const createWindow = () => {
     useContentSize: false, // Inibe mostragem de dimensao da janela
 
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      enableRemoteModule: true
     }
   });
   //mainWindow.removeMenu();
