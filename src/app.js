@@ -8,32 +8,37 @@ import AppBar from './components/app-bar';
 import Welcome from './components/welcome';
 
 export default class App extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            pageRouted: Welcome
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      pageRouted: Welcome
+    };
 
-    routePage = (page) => {
-        this.setState({pageRouted: page})
-    }
+    setTimeout(() => {
+      console.clear();
+    }, 500)
 
-    render() {
-        return (
-            <div>
-                <Dialog fullScreen={Boolean("true")} open={Boolean("true")}>
-                    <DialogTitle style={{padding: 0}}>
-                        <AppBar mainApp={this}></AppBar>
-                    </DialogTitle>
+  }
 
-                    <DialogContent className={'mainContent'}>
-                        <Router>
-                            <Route component={this.state.pageRouted}/>
-                        </Router>
-                    </DialogContent>
-                </Dialog>
-            </div>
-        );
-    }
+  routePage = (page) => {
+    this.setState({ pageRouted: page })
+  }
+
+  render() {
+    return (
+      <div>
+        <Dialog fullScreen={Boolean("true")} open={Boolean("true")}>
+          <DialogTitle style={{ padding: 0 }}>
+            <AppBar mainApp={this}></AppBar>
+          </DialogTitle>
+
+          <DialogContent className={'mainContent'}>
+            <Router>
+              <Route component={this.state.pageRouted} />
+            </Router>
+          </DialogContent>
+        </Dialog>
+      </div>
+    );
+  }
 }

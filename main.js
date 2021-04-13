@@ -2,6 +2,7 @@ require('electron-reload')(__dirname);
 import electron from 'electron';
 import path from 'path';
 import url from 'url';
+import robot from 'robotjs';
 
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -24,10 +25,23 @@ exports.execProcess = (process, callback) => {
   })
 }
 
-exports.testeProcess = (process, callback) => {
-  console.log(11111111111111111111);
-  return 222222222;
+exports.testeProcess = () => {
+  // Speed up the mouse.
+  robot.setMouseDelay(2);
+
+  const twoPI = Math.PI * 10;
+  const screenSize = robot.getScreenSize();
+  const height = (screenSize.height / 2) - 10;
+  const width = screenSize.width;
+
+  for (let x = 0; x < width; x = x + 5)
+  {
+    const y = height * Math.sin((twoPI * x) / width) + height;
+    robot.moveMouse(x, y);
+  }
 }
+
+
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({

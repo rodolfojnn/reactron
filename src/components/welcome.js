@@ -6,7 +6,6 @@ const backend = remote.require('./main.js')
 export default class Home extends React.Component{
 
   onTeste = (e) => {
-    console.log(e);
     console.log(backend.testeProcess());
   }
 
@@ -15,8 +14,8 @@ export default class Home extends React.Component{
         <div>
           <p align="right"><b>source:</b> welcome.js </p>
           <h2>Seja bem-vindo!</h2>
-          <p>Este programa é um projeto base para uma aplicacao React/Electron/Material-UI.</p>
-          <AppButton onClick={() => {this.onTeste(event)}}>
+          <p>Este programa é um projeto base para uma aplicacao React/Electron/Material-UI</p>
+          <AppButton onClick={(e) => {this.onTeste(e)}}>
             LIMPA
           </AppButton>
         </div>
